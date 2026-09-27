@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f4ef" />
+    <meta name="description" content="A calm, thoughtful Sudoku game. Play a new puzzle or scan one from a picture." />
+    <title>Sudoku, at your pace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="game.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="#" aria-label="Sudoku home">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span>still<span class="brand-light">space</span></span>
+        </a>
+        <div class="header-note"><span class="status-dot"></span> a little room to think</div>
+        <button class="text-button" id="header-scan" type="button">Bring your own puzzle <span aria-hidden="true">↗</span></button>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <p class="eyebrow">THE DAILY PAUSE <span>·</span> NO. <span id="puzzle-number">027</span></p>
+          <div class="intro-row">
+            <div>
+              <h1 id="page-title">Sudoku, <em>at your pace.</em></h1>
+              <p class="intro-copy">A quiet little puzzle for a busy day.</p>
+            </div>
+            <div class="date-stamp" aria-label="Today's date"><span id="weekday">SUNDAY</span><strong id="date-label">SEPT 27</strong></div>
+          </div>
+        </section>
+
+        <section class="game-layout" aria-label="Sudoku game">
+          <div class="play-card">
+            <div class="board-heading">
+              <div>
+                <p class="section-label">YOUR PUZZLE</p>
+                <h2 id="game-heading">A fresh start</h2>
+              </div>
+              <div class="timer-wrap" aria-label="Time elapsed"><span class="timer-icon" aria-hidden="true">◷</span><span id="timer">00:00</span></div>
+            </div>
+
+            <div id="sudoku-board" class="sudoku-board" role="grid" aria-label="Sudoku board"></div>
+
+            <div class="board-footer">
+              <div class="board-caption"><span class="legend-dot"></span><span>Original clue</span><span class="legend-dot legend-dot-you"></span><span>Your note</span></div>
+              <div class="keyboard-hint"><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> to move</div>
+            </div>
+
+            <div class="number-pad" aria-label="Enter a number">
+              <div id="number-buttons" class="number-buttons"></div>
+            </div>
+
+            <div class="action-row">
+              <button class="tool-button" id="erase-button" type="button"><span class="tool-icon">⌫</span>Erase</button>
+              <button class="tool-button" id="notes-button" type="button" aria-pressed="false"><span class="tool-icon">✎</span>Notes</button>
+              <button class="tool-button" id="hint-button" type="button"><span class="tool-icon">✦</span>Hint</button>
+              <button class="tool-button check-button" id="check-button" type="button"><span class="tool-icon">✓</span>Check</button>
+            </div>
+            <p id="game-message" class="game-message" aria-live="polite">Choose a square to begin.</p>
+          </div>
+
+          <aside class="side-column" aria-label="Game options">
+            <section class="side-card session-card">
+              <div class="side-card-title"><div><p class="section-label">MAKE IT YOURS</p><h2>Set the mood</h2></div><span class="sparkle" aria-hidden="true">✳</span></div>
+              <label class="field-label" for="difficulty">Puzzle difficulty</label>
+              <div class="select-wrap"><select id="difficulty"><option value="easy">Gentle · Easy</option><option value="medium" selected>Steady · Medium</option><option value="hard">A stretch · Hard</option><option value="imported">Photo puzzle</option></select><span aria-hidden="true">⌄</span></div>
+              <button class="primary-button" id="new-game-button" type="button">New game <span aria-hidden="true">↗</span></button>
+              <div class="card-divider"></div>
+              <div class="session-stats">
+                <div><span>CLUES</span><strong id="clue-count">30</strong></div>
+                <div><span>FILLED</span><strong id="filled-count">0 <small>/ 81</small></strong></div>
+                <div><span>HINTS</span><strong id="hint-count">0</strong></div>
+              </div>
+            </section>
+
+            <section class="photo-card">
+              <div class="photo-topline"><span class="photo-icon" aria-hidden="true">⌁</span><span>THE PHOTO PUZZLE</span></div>
+              <h2>Found one in the wild?</h2>
+              <p>Bring a puzzle from a book, newspaper, or anywhere your camera can see.</p>
+              <button class="outline-button" id="scan-button" type="button">Scan a puzzle <span aria-hidden="true">↗</span></button>
+              <div class="photo-doodle" aria-hidden="true"><span>3</span><span></span><span>7</span><span></span><span>2</span><span></span><span></span><span>8</span><span></span></div>
+            </section>
+
+            <p class="privacy-note"><span aria-hidden="true">◉</span> Photos are read on your device and never uploaded.</p>
+          </aside>
+        </section>
+        <footer class="page-footer"><span>Take the long way to the answer.</span><span>Made for the in-between moments <b>✳</b></span></footer>
+      </main>
+    </div>
+
+    <dialog id="import-dialog" class="import-dialog" aria-labelledby="import-title">
+      <div class="dialog-shell">
+        <div class="dialog-header">
+          <div><p class="section-label">THE PHOTO PUZZLE</p><h2 id="import-title">Bring it into focus.</h2></div>
+          <button class="close-button" id="close-dialog" type="button" aria-label="Close scan dialog">×</button>
+        </div>
+
+        <div id="upload-step" class="import-step">
+          <p class="dialog-copy">Choose a photo of a printed Sudoku. You can use a saved image or open your camera.</p>
+          <label class="drop-zone" id="drop-zone" for="image-input">
+            <span class="upload-symbol" aria-hidden="true">↑</span>
+            <strong>Drop your photo here</strong>
+            <span>or <u>browse files</u> · JPG or PNG</span>
+            <input id="image-input" type="file" accept="image/*" capture="environment" />
+          </label>
+          <p class="upload-error" id="upload-error" role="alert" hidden></p>
+          <p class="privacy-note dialog-privacy"><span aria-hidden="true">◉</span> Your image stays right here on your device.</p>
+        </div>
+
+        <div id="crop-step" class="import-step" hidden>
+          <p class="dialog-copy">Drag around the puzzle grid. Keep the square corners inside the outside border.</p>
+          <div class="crop-stage" id="crop-stage"><canvas id="crop-canvas" aria-label="Photo crop selection"></canvas><div class="crop-placeholder" id="crop-placeholder" hidden></div></div>
+          <div class="scan-progress" id="scan-progress" hidden><div class="progress-track"><span id="progress-bar"></span></div><p id="scan-status" aria-live="polite">Getting the scanner ready…</p></div>
+          <div class="dialog-actions"><button class="quiet-button" id="choose-another" type="button">Choose another</button><button class="primary-button" id="scan-image-button" type="button" disabled>Scan this grid <span aria-hidden="true">↗</span></button></div>
+        </div>
+
+        <div id="review-step" class="import-step" hidden>
+          <div class="review-heading"><div><p class="dialog-copy">Check the clues before you begin. Tap any number to edit it; tap again and clear it if needed.</p><p class="review-summary" id="review-summary"></p></div><span class="review-mark" aria-hidden="true">✳</span></div>
+          <div id="review-grid" class="review-grid" role="grid" aria-label="Review recognized puzzle clues"></div>
+          <div class="review-warning" id="review-warning" hidden></div>
+          <div class="dialog-actions"><button class="quiet-button" id="back-to-photo" type="button">Back to photo</button><button class="primary-button" id="start-photo-game" type="button">Start this puzzle <span aria-hidden="true">↗</span></button></div>
+        </div>
+      </div>
+    </dialog>
+  </body>
+</html>
