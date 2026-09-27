@@ -4,7 +4,7 @@ A small, browser-only Sudoku game. Start a generated puzzle or bring one from a 
 
 ## Run it
 
-Open `index.html` in a recent browser, or serve this directory with any static web server. No build step or package installation is required.
+Open `index.html` in a recent browser, or serve this directory with any static web server. To use the live camera in Chrome, open the game over HTTPS or localhost (for example, run `python3 -m http.server 8000` here and visit `http://localhost:8000`). Grant camera access when Chrome asks. No build step or package installation is required.
 
 ## Play
 
@@ -16,6 +16,6 @@ Open `index.html` in a recent browser, or serve this directory with any static w
 
 ## Bring a puzzle from a picture
 
-Choose **Scan a puzzle**, drop or select an image (the file chooser can open a phone camera), then drag a rectangle tightly around the grid. The scanner recognizes one cell at a time in the browser. Review the editable 9×9 clue grid, fix any OCR mistakes, and start playing.
+Choose **Scan a puzzle**, then use **Use this device’s camera** for a live preview and photo capture, or drop/select an existing image. Drag a rectangle tightly around the grid. The scanner recognizes one cell at a time in the browser. Review the editable 9×9 clue grid, fix any OCR mistakes, and start playing.
 
 The image stays in the browser; Tesseract.js and its English OCR data are loaded from jsDelivr on the first scan. The scanner works best with a clear, upright grid and printed digits. It does not automatically correct perspective or reliably read handwriting, so inspect the clues before starting.

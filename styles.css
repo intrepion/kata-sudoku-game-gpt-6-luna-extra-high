@@ -155,6 +155,16 @@ kbd { min-width: 14px; height: 15px; padding: 0 2px; display: inline-grid; place
 .drop-zone u { color: #557457; text-underline-offset: 2px; }
 .upload-symbol { width: 37px; height: 37px; display: grid; place-items: center; border: 1px solid #d7e0d0; border-radius: 50%; background: #fffefa; color: #63815f; font-size: 22px; }
 .drop-zone input { position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0; }
+.or-separator { height: 33px; display: flex; align-items: center; gap: 11px; color: #a0a59b; font-family: "DM Mono", monospace; font-size: 9px; }
+.or-separator::before, .or-separator::after { height: 1px; flex: 1; background: #eceee8; content: ""; }
+.camera-launch { width: 100%; min-height: 41px; display: flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid #dfe5da; border-radius: 6px; background: #fffefa; color: #4d684f; font-size: 11px; font-weight: 600; cursor: pointer; }
+.camera-launch:hover { border-color: #9fb397; background: #f8faf5; }
+.camera-launch span { color: #77946d; font-size: 17px; }
+.camera-panel { margin-top: 2px; overflow: hidden; border: 1px solid #e4e8e0; border-radius: 8px; background: #f7f8f3; }
+.camera-panel video { width: 100%; max-height: min(52vh, 430px); display: block; object-fit: contain; background: #252923; }
+.camera-panel > p { margin: 0; padding: 10px 12px 0; color: #778074; font-size: 10px; }
+.camera-actions { padding: 5px 12px 10px; display: flex; align-items: center; justify-content: space-between; }
+.camera-actions .primary-button { min-width: 132px; }
 .upload-error { margin: 10px 0 0; color: #a9654d; text-align: center; font-size: 10px; }
 .dialog-privacy { justify-content: center; margin: 15px 0 0; }
 .crop-stage { position: relative; width: 100%; min-height: 120px; display: grid; place-items: center; overflow: hidden; border: 1px solid #e7e9e2; border-radius: 8px; background: #f2f1eb; }

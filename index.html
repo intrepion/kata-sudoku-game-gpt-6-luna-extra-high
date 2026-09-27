@@ -109,6 +109,13 @@
             <span>or <u>browse files</u> · JPG or PNG</span>
             <input id="image-input" type="file" accept="image/*" capture="environment" />
           </label>
+          <div class="or-separator" id="camera-choice-separator"><span>or</span></div>
+          <button class="camera-launch" id="open-camera" type="button"><span aria-hidden="true">◎</span> Use this device’s camera</button>
+          <section class="camera-panel" id="camera-panel" aria-label="Camera preview" hidden>
+            <video id="camera-video" autoplay playsinline muted></video>
+            <p>Hold the puzzle steady and fit the whole grid in the frame.</p>
+            <div class="camera-actions"><button class="quiet-button" id="cancel-camera" type="button">Cancel</button><button class="primary-button" id="capture-photo" type="button">Take photo <span aria-hidden="true">↗</span></button></div>
+          </section>
           <p class="upload-error" id="upload-error" role="alert" hidden></p>
           <p class="privacy-note dialog-privacy"><span aria-hidden="true">◉</span> Your image stays right here on your device.</p>
         </div>

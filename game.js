@@ -19,6 +19,10 @@ const elements = {
   reviewStep: document.querySelector("#review-step"),
   imageInput: document.querySelector("#image-input"),
   dropZone: document.querySelector("#drop-zone"),
+  cameraButton: document.querySelector("#open-camera"),
+  cameraPanel: document.querySelector("#camera-panel"),
+  cameraVideo: document.querySelector("#camera-video"),
+  capturePhotoButton: document.querySelector("#capture-photo"),
   cropCanvas: document.querySelector("#crop-canvas"),
   scanButton: document.querySelector("#scan-image-button"),
   reviewGrid: document.querySelector("#review-grid"),
@@ -43,6 +47,7 @@ let selectedDifficulty = "medium";
 let cropImage = null;
 let cropRect = null;
 let cropDragStart = null;
+let cameraStream = null;
 let ocrWorker = null;
 let ocrScriptPromise = null;
 let timerInterval = null;
@@ -399,6 +404,7 @@ function openImportDialog() {
 }
 
 function resetImport() {
+  stopCamera();
   cropImage = null;
   cropRect = null;
   importedValues = [];
@@ -411,6 +417,84 @@ function resetImport() {
   document.querySelector("#upload-error").hidden = true;
   document.querySelector("#upload-error").textContent = "";
   document.querySelector("#choose-another").disabled = false;
+}
+
+async function startCamera() {
+  const error = document.querySelector("#upload-error");
+  error.hidden = true;
+  error.textContent = "";
+  if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) {
+    showUploadError("Chrome needs this page to be open over HTTPS or localhost to use the camera. You can still upload a photo.");
+    return;
+  }
+  elements.cameraButton.disabled = true;
+  elements.cameraButton.textContent = "Waiting for camera permission…";
+  try {
+    cameraStream = await navigator.mediaDevices.getUserMedia({
+      audio: false,
+      video: { facingMode: { ideal: "environment" } },
+    });
+    if (!elements.dialog.open) {
+      stopCamera();
+      return;
+    }
+    elements.cameraVideo.srcObject = cameraStream;
+    await elements.cameraVideo.play();
+    elements.dropZone.hidden = true;
+    document.querySelector("#camera-choice-separator").hidden = true;
+    elements.cameraButton.hidden = true;
+    elements.cameraPanel.hidden = false;
+  } catch (cameraError) {
+    stopCamera();
+    if (cameraError.name === "NotAllowedError" || cameraError.name === "PermissionDeniedError") {
+      showUploadError("Camera access was blocked. Allow camera access for this page in Chrome, then try again.");
+    } else if (cameraError.name === "NotFoundError" || cameraError.name === "DevicesNotFoundError") {
+      showUploadError("No camera was found. You can still choose or drop a photo.");
+    } else {
+      showUploadError("The camera could not be opened. Check that it is connected and available to Chrome.");
+    }
+  } finally {
+    elements.cameraButton.disabled = false;
+    elements.cameraButton.innerHTML = '<span aria-hidden="true">◎</span> Use this device’s camera';
+  }
+}
+
+function stopCamera() {
+  if (cameraStream) {
+    for (const track of cameraStream.getTracks()) track.stop();
+    cameraStream = null;
+  }
+  elements.cameraVideo.srcObject = null;
+  elements.cameraPanel.hidden = true;
+  elements.cameraButton.hidden = false;
+  elements.dropZone.hidden = false;
+  document.querySelector("#camera-choice-separator").hidden = false;
+}
+
+async function captureCameraPhoto() {
+  const video = elements.cameraVideo;
+  if (!video.videoWidth || !video.videoHeight) {
+    showUploadError("The camera is still starting. Wait a moment and try again.");
+    return;
+  }
+  elements.capturePhotoButton.disabled = true;
+  try {
+    const canvas = document.createElement("canvas");
+    const maxDimension = 2200;
+    const scale = Math.min(1, maxDimension / Math.max(video.videoWidth, video.videoHeight));
+    canvas.width = Math.round(video.videoWidth * scale);
+    canvas.height = Math.round(video.videoHeight * scale);
+    canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+    const photo = await new Promise((resolve, reject) => {
+      canvas.toBlob((blob) => blob ? resolve(blob) : reject(new Error("The camera photo could not be saved.")), "image/jpeg", .92);
+    });
+    stopCamera();
+    acceptImage(photo);
+  } catch (captureError) {
+    showUploadError(captureError.message || "The camera photo could not be saved. Try again.");
+  } finally {
+    elements.capturePhotoButton.disabled = false;
+  }
 }
 
 function acceptImage(file) {
@@ -766,10 +850,14 @@ document.addEventListener("keydown", (event) => {
 });
 
 document.querySelector("#close-dialog").addEventListener("click", () => elements.dialog.close());
+elements.dialog.addEventListener("close", stopCamera);
 elements.dialog.addEventListener("click", (event) => {
   if (event.target === elements.dialog) elements.dialog.close();
 });
 elements.imageInput.addEventListener("change", (event) => acceptImage(event.target.files?.[0]));
+elements.cameraButton.addEventListener("click", startCamera);
+document.querySelector("#cancel-camera").addEventListener("click", stopCamera);
+elements.capturePhotoButton.addEventListener("click", captureCameraPhoto);
 elements.dropZone.addEventListener("dragover", (event) => {
   event.preventDefault();
   elements.dropZone.classList.add("is-dragging");
@@ -805,6 +893,7 @@ elements.reviewGrid.addEventListener("keydown", (event) => {
 });
 document.querySelector("#back-to-photo").addEventListener("click", () => showImportStep("crop"));
 elements.startPhotoGame.addEventListener("click", startImportedGame);
+window.addEventListener("pagehide", stopCamera);
 
 buildNumberPad();
 updateDate();
