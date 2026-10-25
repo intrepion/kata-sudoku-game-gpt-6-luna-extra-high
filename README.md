@@ -1,5 +1,9 @@
 # Sudoku, at your pace
 
+## Play online
+
+[Play Sudoku, at your pace](https://intrepion.github.io/kata-sudoku-game-gpt-6-luna-extra-high/) — free, playable in your browser.
+
 A small, browser-only Sudoku game. Start a generated puzzle or bring one from a photo: choose an image, draw around the 9×9 grid, scan its printed digits, then review and correct the clues before playing.
 
 ## Run it
