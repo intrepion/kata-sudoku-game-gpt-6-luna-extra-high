@@ -23,3 +23,7 @@ Open `index.html` in a recent browser, or serve this directory with any static w
 Choose **Scan a puzzle**, then use **Use this device’s camera** for a live preview and photo capture, or drop/select an existing image. Drag a rectangle tightly around the grid. The scanner recognizes one cell at a time in the browser. Review the editable 9×9 clue grid, fix any OCR mistakes, and start playing.
 
 The image stays in the browser; Tesseract.js and its English OCR data are loaded from jsDelivr on the first scan. The scanner works best with a clear, upright grid and printed digits. It does not automatically correct perspective or reliably read handwriting, so inspect the clues before starting.
+
+## Arcade metadata
+
+See [docs/arcade-metadata.md](docs/arcade-metadata.md) for the game-owned manifest and screenshot provenance.
