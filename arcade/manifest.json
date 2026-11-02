@@ -1,6 +1,47 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "gameId": "kata-sudoku-game-gpt-6-luna-extra-high",
   "playUrl": "https://intrepion.github.io/kata-sudoku-game-gpt-6-luna-extra-high/",
-  "screenshots": []
+  "screenshots": [
+    {
+      "path": "arcade/screenshots/ci-20261102-01.jpg",
+      "sha256": "9e31cb8ae3ff6613f3cb91ebfd284acfcaef45ca0b226a0a085531056428b20e",
+      "alt": "Sudoku, at your pace gameplay, view 1",
+      "provenance": {
+        "kind": "ci_gameplay_capture",
+        "sourcePath": "arcade/capture-evidence/ci-20261102-01.png",
+        "sourceSha256": "3c79fef38dd6272d02eaef1d6c130148f6a685b655c831a93cc7a7f153507fb5",
+        "captureCommit": "0310c1e02ab7dbe356c00ea7973f737a00635152",
+        "workflowRunId": "41379042456",
+        "inputHashes": {
+          "index.html": "f7c4abf4ca134b41c87c0945783fa2a48341037a755b53b1b3e9200b354d6645",
+          "styles.css": "46c40fa9ff8648ea6cc5bcb0b54be64457e39ae5a8bfb137243dfb3f1858ee34",
+          "game.js": "cdfb686018b251175facae60e4e598bede75e77c5da7d674192d25b290668f13"
+        },
+        "publishedFilesVerifiedAt": "2026-11-02T19:01:20Z",
+        "captureRecordPath": "arcade/capture-evidence/ci-20261102-record.json",
+        "captureRecordSha256": "0e9baff1590031888aafd14748a80e8fb12da108c09f64a93bd1cb265e4d853f"
+      }
+    },
+    {
+      "path": "arcade/screenshots/ci-20261102-02.jpg",
+      "sha256": "df8a0e53b75b1f928dfbc1f0d1bb78eebead78973a2bd654b1421ca3bdf86446",
+      "alt": "Sudoku, at your pace gameplay, view 2",
+      "provenance": {
+        "kind": "ci_gameplay_capture",
+        "sourcePath": "arcade/capture-evidence/ci-20261102-02.png",
+        "sourceSha256": "37dc67da7efd678ad65a3a6b2d07dbb53984b3b631372e3f89c4422abd36b618",
+        "captureCommit": "0310c1e02ab7dbe356c00ea7973f737a00635152",
+        "workflowRunId": "41379042456",
+        "inputHashes": {
+          "index.html": "f7c4abf4ca134b41c87c0945783fa2a48341037a755b53b1b3e9200b354d6645",
+          "styles.css": "46c40fa9ff8648ea6cc5bcb0b54be64457e39ae5a8bfb137243dfb3f1858ee34",
+          "game.js": "cdfb686018b251175facae60e4e598bede75e77c5da7d674192d25b290668f13"
+        },
+        "publishedFilesVerifiedAt": "2026-11-02T19:01:20Z",
+        "captureRecordPath": "arcade/capture-evidence/ci-20261102-record.json",
+        "captureRecordSha256": "0e9baff1590031888aafd14748a80e8fb12da108c09f64a93bd1cb265e4d853f"
+      }
+    }
+  ]
 }

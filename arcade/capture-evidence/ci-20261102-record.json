@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "workflowCommit": "eb07453edd58ba60a4f1bab92387c5f0b2b71e3c",
+  "sourceCommit": "0310c1e02ab7dbe356c00ea7973f737a00635152",
+  "runId": "41379042456",
+  "url": "http://127.0.0.1:4177/",
+  "inputs": {
+    "index.html": "f7c4abf4ca134b41c87c0945783fa2a48341037a755b53b1b3e9200b354d6645",
+    "styles.css": "46c40fa9ff8648ea6cc5bcb0b54be64457e39ae5a8bfb137243dfb3f1858ee34",
+    "game.js": "cdfb686018b251175facae60e4e598bede75e77c5da7d674192d25b290668f13"
+  },
+  "browser": "153.0.8010.12",
+  "viewport": {
+    "width": 1280,
+    "height": 1000
+  },
+  "seed": 1989,
+  "screenshots": [
+    "sudoku-01.png",
+    "sudoku-02.png"
+  ]
+}
