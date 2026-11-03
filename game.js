@@ -1,6 +1,6 @@
 const SIZE = 9;
 const STORAGE_KEY = "stillspace-sudoku-v1";
-const OCR_SCRIPT_URL = "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js";
+const OCR_SCRIPT_URL = "https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/tesseract.min.js";
 
 const elements = {
   board: document.querySelector("#sudoku-board"),
